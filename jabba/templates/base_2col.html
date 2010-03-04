@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page %}
+<div id="header">
+  <div class="wrapper clearfix">
+  
+  <div id="status">
+    {% if user.is_authenticated %}
+    <p><strong>{{ user.username }}</strong>. <a href="/accounts/password/change/">change password</a> / <a href="/accounts/logout/">logout</a></p>
+    {% endif %}
+  </div> <!-- status -->
+
+  <div id="logo">
+    <a href="{% url home %}"><h1>Jabba</h1></a>
+  </div> <!-- logo -->
+
+  <div id="menu">
+    {% block menu %}{% endblock %}
+  </div> <!-- menu -->
+
+  </div> <!-- wrapper clearfix -->
+
+</div> <!-- header -->
+
+<div id="content">
+  {% block content %}
+  <div id="left">
+    {% block left %}{% endblock left %}
+  </div> <!--left -->
+
+  <div id="right">
+    {% block rigth %}{% endblock rigth%}
+  </div> <!-- right -->
+  {% endblock content%}
+</div> <!-- content -->
+
+<div id="footer">
+  <p>
+    &copy; Copyright 2010 Wiliam Souza - All rights reserved.
+  </p>
+</div> <!-- footer -->
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block left %}
+<div class="container">
+	<h2>{% trans "Task" %} #{{ task.id }} {{ task.description|slice:":50" }}... </h2>
+  <table cellspacing="0">
+    <tbody>
+    <tr>
+      <th>{% trans "Assigned to" %}</th>
+      {% if task.assigned_to %}
+        {% if user.is_staff %}
+        <td>{{ task.assigned_to }} (<a href="/task/close/{{ task.id }}/">{% trans "Close" %}</a>)</td>
+        {% else %}
+        <td>{{ task.assigned_to }}</td>
+        {% endif %}
+      {% else %}
+        {% if user.is_staff %}
+        <td>{% trans "Unassigned" %} (<a href="/task/assign/{{ task.id }}/">{% trans "Take" %}</a>)</td>
+        {% else %}
+        <td>{% trans "Unassigned" %}</td>
+        {% endif %}
+      {% endif %}
+    </tr>
+    <tr>
+      <th>{% trans "Priority" %}</th>
+      <td>{{ task.get_priority_display }}</td>
+    </tr>
+    <tr>
+      <th>{% trans "Created" %}</th>
+      <td>{{ task.created_by }} {{ task.created }} ({{ task.created|timesince }} {% trans "ago" %})</td>
+    </tr>
+    <tr>
+      <th>{% trans "Attachments" %}</th>
+      <td>
+      {% for a in task.attachments.all %}
+        <a href="{{ a.file.url }}">{{ a.filename }} ({{ a.size|filesizeformat }}), </a>
+      {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th>{% trans "Description" %}</th>
+      <td>{{ task.description }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+	<h2>{% trans "Notes" %}</h2>
+	{% if task.notes.all %}
+  <table cellspacing="0">
+    <thead>
+      <tr><th>{% trans "Description" %}</th><th>{% trans "Created by" %}</th><th>{% trans "Created" %}</th></tr>
+    </thead>
+    <tbody>
+    {% for n in task.notes.all %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+	    <td>{{ n.description }}</td><td>{{ n.created_by }}</td><td>{{ n.created_date }}</td>
+	  </tr>
+    </div>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div id="info">
+	<p>{% trans "Currently there are no notes." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block rigth %}
+    <div class="container">
+      <h2>{% trans "New note" %}</h2>
+      <div class="add_form">
+      <form method="post" action="{% url helpdesk_note_add %}">{% csrf_token %}
+      <ul>
+        {{ noteform.as_ul }}
+        <li>
+          <input type="submit" value="{% trans "Submit"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+    </div>
+{% endblock %}

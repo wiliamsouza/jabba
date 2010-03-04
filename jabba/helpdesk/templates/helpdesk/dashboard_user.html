@@ -1,0 +1,79 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block left %}
+<div class="container">
+	<h2>{% trans "Open tasks" %}</h2>
+	{% if open_tasks %}
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Assigned to" %}</th>
+        <th>{% trans "Created" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for t in open_tasks %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td><a href="{{ t.url_task_detail }}">{{ t.description }}</a></td>
+      {% if task.assigned_to %}
+      <td>{{ task.assigned_to }}</td>
+      {% else %}
+      <td>Unassigned</td>
+      {% endif %}
+      <td>{{ t.created|timesince }} {% trans "ago" %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div id="info">
+	  <p>{% trans "Currently there are no open tasks." %}</p>
+	</div>	
+	{% endif %}
+</div>
+
+<div class="container">
+	<h2>{% trans "Closed tasks" %}</h2>
+	{% if closed_tasks %}
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Closed by" %}</th>
+        <th>{% trans "Closed" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for t in closed_tasks %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ t.description }}</td>
+      <td>{{ t.closed_by }}</td>
+      <td>{{ t.closed|timesince }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div id="info">
+  	<p>{% trans "Currently there are no closed tasks." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block rigth %}
+    <div class="container">
+      <h2>{% trans "New task" %}</h2>
+      <div class="add_form">
+      <form enctype="multipart/form-data" method="post" action="{% url helpdesk_task_user_add %}">{% csrf_token %}
+      <ul>
+        {{ user_task_form.as_ul }}
+        <li>
+          <input type="submit" value="{% trans "Submit"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+    </div>
+{% endblock %}

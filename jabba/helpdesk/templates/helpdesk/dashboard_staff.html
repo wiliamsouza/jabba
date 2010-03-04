@@ -1,0 +1,44 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block left %}
+<div class="container">
+	<h2>{% trans "Tasks" %}</h2>
+	{% if new_tasks %}
+    {% for t in new_tasks %}
+    <div class="ui-widget-content draggable">
+      <p id="task_id">{{ t.id }}</p>
+	    <p>{{ t.description|slice:"85" }}</p>
+    </div>
+    {% endfor %}
+	{% else %}
+	<div id="info">
+	<p>{% trans "There are no tasks here at the moment." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+
+{% block rigth %}
+	{% if teams %}
+	{% for team in teams %}
+  <div class="container droppable">
+    <h2><a href="{{ team.url_dashboard_team }}">{{ team.name }}</a></h2>
+    <div class="teams">
+      <ul>
+        <li id="team_id">{{ team.id }}</li>
+        <li id="task_count">{{ team.tasks.count }} Tasks</li>
+        <li>{{ team.contexts.count }} Contexts</li>
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="container">
+  <h2>{% trans "Teams" %}</h2>
+  <div id="info">
+    <p>There are no team here at the moment.</p>
+    <p>To add a team <a href="{% url helpdesk_team %}">click here</a>.</p>
+  </div>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block left %}
+<div class="container">
+	<h2>{% trans "Teams" %}</h2>
+	{% if teams %}
+  <table cellspacing="0">
+    <thead>
+      <tr><th>{% trans "Team name" %}</th></tr>
+    </thead>
+    <tbody>
+    {% for t in teams %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td><a href="{{ t.url_team_edit }}">{{ t.name }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div id="info">
+	<p>{% trans "Currently there are no teams." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+{% block rigth %}
+    <div class="container">
+      <h2>{% trans "New team" %}</h2>
+      <div class="add_form">
+      <form method="post" action="{{ form_url }}">{% csrf_token %}
+      <ul>
+        {{ teamform.as_ul }}
+        <li>
+          <input type="submit" value="{% trans "Submit"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+    </div>
+{% endblock %}

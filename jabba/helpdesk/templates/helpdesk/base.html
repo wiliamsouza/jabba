@@ -1,0 +1,14 @@
+{% extends "base_2col.html" %}
+{% load i18n %}
+{% block menu %}
+    <ul>
+      {% if user.is_staff %}
+      <li><a href="{% url helpdesk_dashboard_staff %}">{% trans "Dashboard" %}</a></li>
+      <li><a href="{% url helpdesk_team %}">{% trans "Team" %}</a></li>
+      <li><a href="">{% trans "Context" %}</a></li>
+      <li><a href="">{% trans "Statistics" %}</a></li>
+      {% else %}
+      <li><a href="{% url helpdesk_dashboard_user %}">{% trans "Dashboard" %}</a></li>
+      {% endif %}
+    </ul>
+{% endblock %}
