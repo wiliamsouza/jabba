@@ -3,12 +3,7 @@
 Quick install guide
 ===================
 
-This guide will guide you to a minimal and fast installation.
-
-Install Python
---------------
-
-Get Python at http://www.python.org.
+This guide will guide you to quick installation.
 
 Install Python and Django
 -------------------------
@@ -21,7 +16,8 @@ Python download and installation methods.
 Install django-registration
 ---------------------------
 
-    * django-registration - http://bitbucket.org/ubernostrum/django-registration/
+Consult the `django-registration wiki <http://bitbucket.org/ubernostrum/django-registration/wiki/Home>`_
+for installation instructions.
 
 Install Jabba
 -------------
