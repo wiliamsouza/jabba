@@ -1,0 +1,34 @@
+.. _quickstart:
+
+Quick install guide
+===================
+
+This guide will guide you to a minimal and fast installation.
+
+Install Python
+--------------
+
+Get Python at http://www.python.org.
+
+Install Python and Django
+-------------------------
+
+Jabba needs `Django <http://www.djangoproject.com>`_ and Django needs
+`Python <http://www.python.org/>`_ to run. Check `Django quick install guide
+<http://docs.djangoproject.com/en/dev/intro/install/>`_ for both Django and
+Python download and installation methods.
+
+Install django-registration
+---------------------------
+
+    * django-registration - http://bitbucket.org/ubernostrum/django-registration/
+
+Install Jabba
+-------------
+
+Create a folder named ``dev``, ``cd`` into that directory then clone Jabba
+repository::
+
+    git clone git://github.com/wiliamsouza/jabba.git
+
+This will create a ``jabba`` folder in your current directory.
