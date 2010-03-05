@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page %}
+<div id="login">
+  <h1>Jabba</h1>
+  <form method="post">{% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+    <li>
+      <input type="submit" value="login">
+      <input type="hidden" name="next" value="" />
+    </li>
+    <li>
+      <a href="/accounts/password/reset/">{% trans "Forgot your password?" %}</a>  
+    </li>
+    <li>
+      <a href="/accounts/register/">{% trans "Don't have an account?" %}</a>  
+    </li>
+  </ul>
+  </form>
+</div> <!-- login -->
+{% endblock page %}

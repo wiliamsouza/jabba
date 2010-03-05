@@ -1,0 +1,8 @@
+{% load i18n %}
+{% trans "Please click the following link to complete your Jabba account registration." %}
+
+http://{{ site }}{% url registration_activate activation_key %}
+
+{% trans "That's it! Thanks for registering." %}
+
+{% trans "P.S - This activation code is valid for" %} {{ expiration_days }} {% trans "days" %}.
