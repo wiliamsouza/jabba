@@ -1,3 +1,6 @@
-#anywhere
+# globs, anywhere.
 *.pyc
 *.sqlite
+
+# specific dirs
+jabba/registration
