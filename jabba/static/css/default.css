@@ -1,7 +1,7 @@
 body {
   color: #444444;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Arial, Helvetica, sans-serif;
   font-size: 13px;
+  font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
 }
 
 a {
@@ -9,34 +9,58 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  color: #444444;
+  font-size: 13px;
+  font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
+}
+
+/*
 form {
   padding: 0 0 10px 0;
   margin: 15px 15px 0 0;
 }
-
+*/
 form li {
   padding: 5px 0 10px 0;
 }
 
 form label {
-  font-weight: bold;
-  padding: 0 0 5px;
   display: block;
+  padding: 0 0 5px;
+  font-weight: bold;
+}
+
+table {
+	width: 100%;
+}
+
+
+td, th {
+  padding: 5px;
+	max-width: 500px;
+  border-bottom: 1px solid #ddd;
+  font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
+}
+
+th {
+  text-align: left;
+  font-weight: bold;
 }
 
 #page {
-	width: 960px;
-	padding: 10px;
+	overflow: hidden;
 	margin: 0 auto;
-
+	padding: 10px;
+	width: 960px;
 }
 
 #header {
   float: left;
   width: 100%;
+  color: #444444;
   margin-bottom: 10px;
   border: 1px solid #C6C6C6;
-  color: #444444;
 }
 
 #status {
@@ -68,6 +92,10 @@ form label {
   padding: 4px 7px;
 }
 
+#content {
+	overflow: hidden;
+}
+
 #left {
 	float: left;
 	width: 700px;
@@ -85,7 +113,6 @@ form label {
   border: 1px solid #C6C6C6;
   color: #444444;
 }
-
 
 #login {
   width: 400px;
@@ -115,6 +142,37 @@ form label {
 .container h2 {
   font-size: 1.5em;
   margin-bottom: 8px;
+}
+
+.info, .success, .warning, .error {
+  padding: 25px 10px 25px 55px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+
+.info {
+  border-top: 2px solid #B5D4FE;
+  border-bottom: 2px solid #B5D4FE;
+  background-color: #F8FAFC;
+  background-image: url('/static/images/info.png');
+}
+
+.success {
+
+  background-color: #DFF2BF;
+  background-image:url('/static/images/success.png');
+}
+.warning {
+	border-top: 2px solid #ffd324;
+	border-bottom: 2px solid #ffd324;
+  background-color: #fff6bf;
+  background-image: url('/static/images/warning.png');
+}
+
+.error {
+
+  background-color: #FFBABA;
+  background-image: url('/static/images/error.png');
 }
 
 #footer {

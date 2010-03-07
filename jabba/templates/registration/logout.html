@@ -1,5 +1,7 @@
 {% extends "base_2col.html" %}
 {% load i18n %}
 {% block content %}
+<div class="info">
 <p>{% trans "You've been logged out!" %} <a href="/accounts/login/">{% trans "login again" %}</a></p>
+</div>
 {% endblock content%}

@@ -11,7 +11,7 @@
     </div>
     {% endfor %}
 	{% else %}
-	<div id="info">
+	<div class="info">
 	<p>{% trans "There are no tasks here at the moment." %}</p>
 	</div>	
 	{% endif %}
@@ -35,7 +35,7 @@
   {% else %}
   <div class="container">
   <h2>{% trans "Teams" %}</h2>
-  <div id="info">
+  <div class="info">
     <p>There are no team here at the moment.</p>
     <p>To add a team <a href="{% url helpdesk_team %}">click here</a>.</p>
   </div>
