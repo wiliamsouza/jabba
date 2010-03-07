@@ -27,7 +27,7 @@
     </tbody>
   </table>
 	{% else %}
-	<div id="info">
+	<div class="info">
 	  <p>{% trans "Currently there are no open tasks." %}</p>
 	</div>	
 	{% endif %}
@@ -55,7 +55,7 @@
     </tbody>
   </table>
 	{% else %}
-	<div id="info">
+	<div class="info">
   	<p>{% trans "Currently there are no closed tasks." %}</p>
 	</div>	
 	{% endif %}
@@ -65,8 +65,8 @@
 {% block rigth %}
     <div class="container">
       <h2>{% trans "New task" %}</h2>
-      <div class="add_form">
-      <form enctype="multipart/form-data" method="post" action="{% url helpdesk_task_user_add %}">{% csrf_token %}
+      <!-- <div class="add_form"> -->
+      <form  method="post" action="{% url helpdesk_task_user_add %}">{% csrf_token %}
       <ul>
         {{ user_task_form.as_ul }}
         <li>
@@ -74,6 +74,6 @@
         </li>
       </ul>
       </form>
-      </div>
+      <!-- </div> -->
     </div>
 {% endblock %}

@@ -15,7 +15,7 @@ class TeamForm(forms.ModelForm):
 
 
 class TeamTaskForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea())#attrs={'cols':'35', 'rows':'6'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols':'24', 'rows':'6'}))
     current_team = forms.CharField(widget=forms.HiddenInput())
     assign_to_me = forms.CharField(required=False, widget=forms.CheckboxInput())
 
@@ -40,14 +40,48 @@ class TeamTaskForm(forms.ModelForm):
 
 
 class UserTaskForm(forms.Form):
-    description = forms.CharField(widget=forms.Textarea())#attrs={'cols':'35', 'rows':'6'}))
-    attachment = forms.FileField(required=False)    
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols':'24', 'rows':'6'}))
+    #attachment = forms.FileField(required=False)    
 
     def save(self, user):
         task = Task()
         task.description = self.cleaned_data['description'].capitalize()
         task.created_by = user
         task.save()
+#        if self.cleaned_data['attachment']:
+#            import mimetypes
+#            file = self.cleaned_data['attachment']
+#            filename = file.name.replace(' ', '_')
+#            a = Attachment(
+#                filename=filename,
+#                mime_type=mimetypes.guess_type(filename)[0] or 'application/octet-stream',
+#                size=file.size,
+#                )
+#            a.file.save(file.name, file, save=False)
+#            a.save()
+#            task.attachments = [a]
+        task.save()
+        return task
+
+
+class NoteForm(forms.Form):
+    description = forms.CharField(widget=forms.Textarea(attrs={'cols':'24', 'rows':'6'}))
+    task = forms.CharField(widget=forms.HiddenInput())
+
+    def save(self, user):
+        note = Note()
+        note.created_by = user
+        note.description = self.cleaned_data['description'].capitalize()
+        note.task = Task.objects.get(id=int(self.cleaned_data['task']))
+        note.save()
+        return note
+
+class AttachmentForm(forms.Form):
+    attachment = forms.FileField(required=False)
+    task = forms.CharField(widget=forms.HiddenInput())
+    
+    def save(self, user):
+        task = Task.objects.get(id=int(self.cleaned_data['task']))
         if self.cleaned_data['attachment']:
             import mimetypes
             file = self.cleaned_data['attachment']
@@ -59,19 +93,6 @@ class UserTaskForm(forms.Form):
                 )
             a.file.save(file.name, file, save=False)
             a.save()
-            task.attachments = [a]
+            task.attachments.add(a)
         task.save()
-        return task
-
-
-class NoteForm(forms.Form):
-    description = forms.CharField(widget=forms.Textarea())#attrs={'cols':'35', 'rows':'6'}))
-    task = forms.CharField(widget=forms.HiddenInput())
-
-    def save(self, user):
-        note = Note()
-        note.created_by = user
-        note.description = self.cleaned_data['description'].capitalize()
-        note.task = Task.objects.get(id=int(self.cleaned_data['task']))
-        note.save()
-        return note
+        return None

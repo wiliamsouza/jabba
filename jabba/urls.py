@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 
-from helpdesk.views import dashboard_user, dashboard_staff, task_user_add, task_detail, team, note_add
+from helpdesk.views import dashboard_user, dashboard_staff, task_user_add, task_detail, team, note_add, attachment_add
 
 
 from django.contrib import admin
@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^team/$', team, name='helpdesk_team'),
     url(r'^team/(?P<team_id>\d+)/$', team, name='helpdesk_team_edit'),
     url(r'^note/add/$', note_add, name='helpdesk_note_add'),
+    url(r'^attachment/add/$', attachment_add, name='helpdesk_attachment_add'),
 )
 
 

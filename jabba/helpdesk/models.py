@@ -90,7 +90,7 @@ class Note(models.Model):
 
 
 class Attachment(models.Model):
-    file = models.FileField(_('File'), upload_to='attachment')
+    file = models.FileField(_('File'), upload_to='static/attachment')
     filename = models.CharField(_('Filename'), max_length=128)
     mime_type = models.CharField(_('MIME Type'), max_length=32)
     size = models.IntegerField(_('Size'))

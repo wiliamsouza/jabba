@@ -10,7 +10,7 @@ from django.http import Http404, HttpResponseRedirect, HttpResponse, \
 
 
 from helpdesk.models import get_team_or_create,  get_context_or_create, Team, Task
-from helpdesk.forms import TeamForm, UserTaskForm, NoteForm
+from helpdesk.forms import TeamForm, UserTaskForm, NoteForm, AttachmentForm
 
 
 @login_required
@@ -50,10 +50,12 @@ def task_detail(request, task_id=0):
     if task_id:
         task = get_object_or_404(Task, id=task_id)
         noteform = NoteForm(initial={'task':task_id})
+        attachmentform = AttachmentForm(initial={'task':task_id})
     return render_to_response(
         'helpdesk/task_detail.html',
         {'task': task,
          'noteform': noteform,
+         'attachmentform': attachmentform,
         },
         context_instance=RequestContext(request)
         )
@@ -62,20 +64,11 @@ def task_detail(request, task_id=0):
 @login_required
 #@csrf_protect
 def task_user_add(request, task_id=0):
-    form = UserTaskForm()
-    if task_id:
-        task = get_object_or_404(Task, id=task_id)
-        form = UserTaskForm(instance=task)
     if request.method == 'POST':
-        form = UserTaskForm(request.POST, request.FILES)
+        form = UserTaskForm(request.POST)
         if form.is_valid():
             task = form.save(request.user)
-            return HttpResponseRedirect(reverse('helpdesk_dashboard_user'))
-    return render_to_response(
-        'helpdesk/new.html',
-        {'form': form,},
-        context_instance=RequestContext(request)
-        )
+    return HttpResponseRedirect(reverse('helpdesk_dashboard_user'))
 
 
 @login_required
@@ -111,10 +104,19 @@ def note_add(request):
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
-            #print form.cleaned_data['task']
             form.save(request.user)
     return HttpResponseRedirect(
         reverse('helpdesk_task_detail',
         args=[request.POST['task']])
         )
 
+
+def attachment_add(request):
+    if request.method == 'POST':
+        form = AttachmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(request.user)
+    return HttpResponseRedirect(
+        reverse('helpdesk_task_detail',
+        args=[request.POST['task']])
+        )
