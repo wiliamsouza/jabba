@@ -2,7 +2,6 @@
 {% load i18n %}
 {% block page %}
 <div id="header">
-  <div class="wrapper clearfix">
   
   <div id="status">
     {% if user.is_authenticated %}
@@ -17,8 +16,6 @@
   <div id="menu">
     {% block menu %}{% endblock %}
   </div> <!-- menu -->
-
-  </div> <!-- wrapper clearfix -->
 
 </div> <!-- header -->
 
