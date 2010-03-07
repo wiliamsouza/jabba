@@ -9,4 +9,4 @@ recursive-include jabba/static *
 recursive-include jabba/templates *
 recursive-include jabba/helpdesk/templates *
 prune jabba/registration
-prume docs/_build
+prune docs/_build
