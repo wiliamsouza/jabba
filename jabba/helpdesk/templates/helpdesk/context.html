@@ -1,0 +1,39 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block left %}
+<div class="container">
+	<h2>{% trans "Contexts" %}</h2>
+	{% if contexts %}
+  <table cellspacing="0">
+    <thead>
+      <tr><th>{% trans "Context name" %}</th><th>{% trans "Team" %}</th></tr>
+    </thead>
+    <tbody>
+    {% for c in contexts %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td><a href="{{ c.url_context_edit }}">{{ c.name }}</a></td>
+      <td>{{ c.team }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div class="info">
+	<p>{% trans "There are no context here at the moment." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+{% block rigth %}
+    <div class="container">
+      <h2>{% trans "New context" %}</h2>
+      <form method="post" action="{{ form_url }}">{% csrf_token %}
+      <ul>
+        {{ contextform.as_ul }}
+        <li>
+          <input type="submit" value="{% trans "Submit"%}"/>
+        </li>
+      </ul>
+      </form>
+    </div>
+{% endblock %}
