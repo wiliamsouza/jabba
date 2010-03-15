@@ -15,14 +15,8 @@ textarea {
   font-family: "Lucida Grande", Tahoma, Arial, sans-serif;
 }
 
-/*
-form {
-  padding: 0 0 10px 0;
-  margin: 15px 15px 0 0;
-}
-*/
 form li {
-  padding: 5px 0 10px 0;
+  padding: 5px 0 5px 0;
 }
 
 form label {
@@ -35,7 +29,6 @@ table {
 	width: 100%;
 }
 
-
 td, th {
   padding: 5px;
 	max-width: 500px;
@@ -46,6 +39,47 @@ td, th {
 th {
   text-align: left;
   font-weight: bold;
+}
+
+img {
+  border: none;
+}
+
+#breadcrumbs {
+	padding: 5px 0 5px 10px;
+}
+
+#breadcrumbs a  {
+  color: #ccccc;
+}
+
+#list {
+  margin: 0px;
+  padding: 0px;
+}
+
+#list li {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	float: left;
+	width: 157.5px;
+	overflow: hidden;
+	max-height: 107px;
+	min-height: 80px;
+	background-color: #D7D3E0;
+}
+
+#list li span {
+  font-size: 1.2em;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.dragg-highlight {
+  width: 50px;
+  height: 50px;
+  background-color: #CCC;
 }
 
 #page {
@@ -79,6 +113,7 @@ th {
 
 #menu {
 	padding: 10px 0 10px 0;
+  float: right;
 }
 
 #menu li {
@@ -105,8 +140,12 @@ th {
   color: #444444;
 }
 
-#right {
+.add_form {
+  border: 1px solid #C6C6C6;
+  padding: 15px;
+}
 
+#right {
   float: left;
   width: 246px;
 	min-height: 100px;
@@ -137,6 +176,11 @@ th {
 
 .container {
   margin: 15px;
+/*	overflow: hidden; */
+}
+
+.container h1 {
+  margin-bottom: 8px;
 }
 
 .container h2 {
@@ -144,10 +188,32 @@ th {
   margin-bottom: 8px;
 }
 
+.container input[type=text], .container input[type=password] {
+  width: 96%;
+}
+
+.container form textarea {
+  width: 96%;
+}
+
+.container form select {
+  width: 100%;
+}
+
 .info, .success, .warning, .error {
   padding: 25px 10px 25px 55px;
   background-repeat: no-repeat;
   background-position: 10px center;
+}
+
+.errorlist li {
+  padding: 5px 5px 5px 35px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+	border-top: 2px solid #fd1414;
+	border-bottom: 2px solid #fd1414;
+  background-color: #fda3a3;
+  background-image: url('/static/images/16/error.png');
 }
 
 .info {
@@ -158,10 +224,10 @@ th {
 }
 
 .success {
-
   background-color: #DFF2BF;
   background-image:url('/static/images/success.png');
 }
+
 .warning {
 	border-top: 2px solid #ffd324;
 	border-bottom: 2px solid #ffd324;
@@ -170,7 +236,6 @@ th {
 }
 
 .error {
-
   background-color: #FFBABA;
   background-image: url('/static/images/error.png');
 }
