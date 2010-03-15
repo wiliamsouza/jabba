@@ -4,6 +4,13 @@ from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 
 
+class TaskManager(models.Manager):
+    use_for_related_fields = True
+
+    def open(self):
+        return self.get_query_set().exclude(status=4)
+
+
 def get_team_or_create():
     team, created = Team.objects.get_or_create(name=ugettext('Main'))
     return team
@@ -34,7 +41,6 @@ class Task(models.Model):
     STATUS_CHOICES = (
         (1, _('Open')),
         (2, _('Reopened')),
-        (3, _('Resolved')),
         (4, _('Closed')),
     )
 
@@ -59,16 +65,14 @@ class Task(models.Model):
     priority = models.IntegerField(_('Priority'), choices=PRIORITY_CHOICES, default=3, blank=3)
     assigned_to = models.ForeignKey(User, verbose_name=_('Assigned to'), related_name='tasks_assigned', blank=True, null=True)
 
-    def url_task_detail(self):
-        return ('helpdesk_task_detail', [str(self.id)])
-    url_task_detail = models.permalink(url_task_detail)
+    objects = TaskManager()
 
     def __unicode__(self):
         return self.description
 
 
 class Context(models.Model):
-    name = models.CharField(_('Title'), max_length=64)
+    name = models.CharField(_('Name'), max_length=64)
     team = models.ForeignKey('Team', verbose_name=_('Team'), default=get_team_or_create, related_name='contexts')
 
     def url_context_edit(self):
@@ -90,7 +94,7 @@ class Note(models.Model):
 
 
 class Attachment(models.Model):
-    file = models.FileField(_('File'), upload_to='static/attachment')
+    file = models.FileField(_('File'), upload_to='attachment')
     filename = models.CharField(_('Filename'), max_length=128)
     mime_type = models.CharField(_('MIME Type'), max_length=32)
     size = models.IntegerField(_('Size'))
