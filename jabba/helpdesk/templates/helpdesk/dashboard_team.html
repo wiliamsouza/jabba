@@ -1,0 +1,104 @@
+{% extends "helpdesk/base.html" %}
+{% load i18n %}
+{% block breadcrumb %}
+  {{ block.super }}<strong>{{ team|lower }}</strong>
+{% endblock %}
+{% block left %}
+<div class="container">
+  <h1>{{ team }}</h1>
+	<h2>{% trans "Inbox" %}</h2>
+	{% if tasks_open %}
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Assigned to" %}</th>
+        <th>{% trans "Created" %}</th></tr>
+    </thead>
+    <tbody>
+    {% for task in tasks_open %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td><a href="{% url helpdesk_task_detail task.id %}">{{ task.description }}</a></td>
+      {% if task.assigned_to %}
+      <td>{{ task.assigned_to }} (<a href="{% url helpdesk_task_close task.id %}">{% trans "Close" %}</a>)</td>
+      {% else %}
+      <td>{% trans "Unassigned" %} (<a href="{% url helpdesk_task_assign task.id %}">{% trans "Take" %}</a>)</td>
+      {% endif %}
+      <td>{{ task.created|timesince }} {% trans "ago" %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div class="info">
+	<p>{% trans "There are no new tasks here at the moment." %}</p>
+	</div> <!-- info -->	
+	{% endif %}
+</div> <!-- container -->
+{% for context in team.contexts.all %}
+{% if context.tasks.open %}
+<div class="container">
+	<h2>{{ context.name }}</h2>
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Assigned to" %}</th>
+        <th>{% trans "Created" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for task in context.tasks.open %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td><a href="{% url helpdesk_task_detail task.id %}">{{ task.description }}</a></td>
+      {% if task.assigned_to %}
+      <td>{{ task.assigned_to }} (<a href="{% url helpdesk_task_close task.id %}">{% trans "Close" %}</a>)</td>
+      {% else %}
+      <td>{% trans "Unassigned" %} (<a href="{% url helpdesk_task_assign task.id %}">{% trans "Take" %}</a>)</td>
+      {% endif %}
+      <td>{{ task.created|timesince }} {% trans "ago" %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div> <!-- container -->
+{% endif %}
+{% endfor %}
+<div class="container">
+	<h2>{% trans "Closed tasks" %}</h2>
+	{% if tasks_closed %}
+  <table cellspacing="0">
+    <thead>
+      <tr>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Closed by" %}</th>
+        <th>{% trans "Closed" %}</th></tr>
+    </thead>
+    <tbody>
+    {% for task in tasks_closed %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ task.description }}</td><td>{{ task.closed_by }}</td><td>{{ task.closed|timesince }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+	{% else %}
+	<div class="info">
+	<p>{% trans "There are no closed tasks here at the moment." %}</p>
+	</div>	
+	{% endif %}
+</div>
+{% endblock %}
+{% block rigth %}
+    <div class="container">
+      <h2>{% trans "New task" %}</h2>
+      <form enctype="multipart/form-data" method="post" action="{% url helpdesk_task_team_add %}">{% csrf_token %}
+      <ul>
+        {{ teamtaskform.as_ul }}
+        <li>
+          <input type="submit" value="{% trans "Submit"%}"/>
+        </li>
+      </ul>
+      </form>
+    </div>
+{% endblock %}
