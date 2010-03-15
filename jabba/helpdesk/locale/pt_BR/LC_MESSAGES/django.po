@@ -1,0 +1,333 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-15 14:27-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:8
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:9
+msgid "Password"
+msgstr "Senha"
+
+#: forms.py:18 models.py:65 templates/helpdesk/task_detail.html:33
+msgid "Priority"
+msgstr "Prioridade"
+
+#: forms.py:23 models.py:62 models.py:80 templates/helpdesk/base.html:10
+#: templates/helpdesk/context.html:9 templates/helpdesk/task_detail.html:55
+msgid "Team"
+msgstr "Time"
+
+#: forms.py:33 forms.py:52 models.py:55 templates/helpdesk/base.html:11
+#: templates/helpdesk/task_detail.html:77
+msgid "Context"
+msgstr "Contexto"
+
+#: forms.py:49 forms.py:75 forms.py:87 models.py:54 models.py:93
+#: templates/helpdesk/dashboard_team.html:14
+#: templates/helpdesk/dashboard_team.html:45
+#: templates/helpdesk/dashboard_team.html:73
+#: templates/helpdesk/dashboard_user.html:10
+#: templates/helpdesk/dashboard_user.html:41
+#: templates/helpdesk/task_detail.html:118
+#: templates/helpdesk/task_detail.html:129
+msgid "Description"
+msgstr "Descrição"
+
+#: forms.py:51
+msgid "Assign to me"
+msgstr "Atribuir para mim"
+
+#: forms.py:100
+msgid "Attachment"
+msgstr "Anexos"
+
+#: models.py:15
+msgid "Main"
+msgstr "Principal"
+
+#: models.py:20 templates/helpdesk/dashboard_team.html:9
+msgid "Inbox"
+msgstr "Caixa de entrada"
+
+#: models.py:25 models.py:79
+msgid "Name"
+msgstr "Nome"
+
+#: models.py:42
+msgid "Open"
+msgstr "Aberta"
+
+#: models.py:43
+msgid "Reopened"
+msgstr "Reaberta"
+
+#: models.py:44 models.py:58 templates/helpdesk/dashboard_team.html:75
+#: templates/helpdesk/dashboard_user.html:43
+msgid "Closed"
+msgstr "Fechada"
+
+#: models.py:48
+msgid "Critical"
+msgstr "Crítica"
+
+#: models.py:49
+msgid "High"
+msgstr "Alta"
+
+#: models.py:50
+msgid "Normal"
+msgstr "Normal"
+
+#: models.py:51
+msgid "Low"
+msgstr "Baixa"
+
+#: models.py:56 templates/helpdesk/dashboard_team.html:16
+#: templates/helpdesk/dashboard_team.html:47
+#: templates/helpdesk/dashboard_user.html:12
+#: templates/helpdesk/task_detail.html:13
+#: templates/helpdesk/task_detail.html:129
+msgid "Created"
+msgstr "Data Criação"
+
+#: models.py:57 models.py:91 templates/helpdesk/task_detail.html:129
+msgid "Created by"
+msgstr "Criado por"
+
+#: models.py:59 templates/helpdesk/dashboard_team.html:74
+#: templates/helpdesk/dashboard_user.html:42
+msgid "Closed by"
+msgstr "Fechado por"
+
+#: models.py:60
+msgid "Due date"
+msgstr "Vencimento"
+
+#: models.py:61
+msgid "Show from"
+msgstr "Mostrar a partir"
+
+#: models.py:63 templates/helpdesk/task_detail.html:99
+msgid "Attachments"
+msgstr "Anexos"
+
+#: models.py:64
+msgid "Status"
+msgstr "Estado"
+
+#: models.py:66 templates/helpdesk/dashboard_team.html:15
+#: templates/helpdesk/dashboard_team.html:46
+#: templates/helpdesk/dashboard_user.html:11
+#: templates/helpdesk/task_detail.html:17
+msgid "Assigned to"
+msgstr "Atribuído a"
+
+#: models.py:92
+msgid "Open date"
+msgstr "Data de Abertura"
+
+#: models.py:94 templates/helpdesk/task_detail.html:9
+msgid "Task"
+msgstr "Tarefa"
+
+#: models.py:101
+msgid "File"
+msgstr "Arquivo"
+
+#: models.py:102
+msgid "Filename"
+msgstr "Nome do arquivo"
+
+#: models.py:103
+msgid "MIME Type"
+msgstr "Tipo MIME"
+
+#: models.py:104
+msgid "Size"
+msgstr "Tamanho"
+
+#: templates/helpdesk/base.html:4 templates/helpdesk/dashboard_staff.html:4
+msgid "staff"
+msgstr "equipe"
+
+#: templates/helpdesk/base.html:9 templates/helpdesk/base.html.py:14
+msgid "Dashboard"
+msgstr "Painel"
+
+#: templates/helpdesk/base.html:12
+msgid "Statistics"
+msgstr "Estatísticas"
+
+#: templates/helpdesk/context.html:5
+msgid "Contexts"
+msgstr "Contextos"
+
+#: templates/helpdesk/context.html:9
+msgid "Context name"
+msgstr "Nome do contexto"
+
+#: templates/helpdesk/context.html:22
+msgid "There are no context here at the moment."
+msgstr "Não existe nenhum contexto aqui até o momento."
+
+#: templates/helpdesk/context.html:29
+msgid "New context"
+msgstr "Novo contexto"
+
+#: templates/helpdesk/context.html:34
+#: templates/helpdesk/dashboard_team.html:99
+#: templates/helpdesk/dashboard_user.html:70 templates/helpdesk/new.html:9
+#: templates/helpdesk/task_detail.html:107
+#: templates/helpdesk/task_detail.html:154 templates/helpdesk/team.html:34
+msgid "Submit"
+msgstr "Submeter"
+
+#: templates/helpdesk/dashboard_staff.html:8
+msgid "Tasks"
+msgstr "Tarefas"
+
+#: templates/helpdesk/dashboard_staff.html:20
+msgid "There are no tasks here at the moment."
+msgstr "Não existe nenhuma tarefa aqui até o momento."
+
+#: templates/helpdesk/dashboard_staff.html:41 templates/helpdesk/team.html:5
+msgid "Teams"
+msgstr "Times"
+
+#: templates/helpdesk/dashboard_staff.html:43
+msgid "There are no team here at the moment."
+msgstr "Não existe nenhum time aqui até o momento."
+
+#: templates/helpdesk/dashboard_staff.html:44
+msgid "To add a team"
+msgstr "Para adicionar um time"
+
+#: templates/helpdesk/dashboard_staff.html:44
+msgid "click here"
+msgstr "clique aqui"
+
+#: templates/helpdesk/dashboard_team.html:23
+#: templates/helpdesk/dashboard_team.html:55
+#: templates/helpdesk/task_detail.html:20
+msgid "Close"
+msgstr "Fechar"
+
+#: templates/helpdesk/dashboard_team.html:25
+#: templates/helpdesk/dashboard_team.html:57
+#: templates/helpdesk/task_detail.html:26
+#: templates/helpdesk/task_detail.html:28
+msgid "Unassigned"
+msgstr "Não atribuído"
+
+#: templates/helpdesk/dashboard_team.html:25
+#: templates/helpdesk/dashboard_team.html:57
+#: templates/helpdesk/task_detail.html:26
+msgid "Take"
+msgstr "Pegar"
+
+#: templates/helpdesk/dashboard_team.html:27
+#: templates/helpdesk/dashboard_team.html:59
+#: templates/helpdesk/dashboard_user.html:24
+#: templates/helpdesk/task_detail.html:14
+msgid "ago"
+msgstr "atrás"
+
+#: templates/helpdesk/dashboard_team.html:34
+msgid "There are no new tasks here at the moment."
+msgstr "Não existe nenhuma nova tarefa aqui até o momento."
+
+#: templates/helpdesk/dashboard_team.html:68
+#: templates/helpdesk/dashboard_user.html:36
+msgid "Closed tasks"
+msgstr "Tarefas fechadas"
+
+#: templates/helpdesk/dashboard_team.html:87
+#: templates/helpdesk/dashboard_user.html:58
+msgid "There are no closed tasks here at the moment."
+msgstr "Não existe nenhuma tarefa fechada aqui até o momento."
+
+#: templates/helpdesk/dashboard_team.html:94
+#: templates/helpdesk/dashboard_user.html:65
+msgid "New task"
+msgstr "Nova tarefa"
+
+#: templates/helpdesk/dashboard_user.html:5
+msgid "Open tasks"
+msgstr "Tarefas abertas"
+
+#: templates/helpdesk/dashboard_user.html:31
+msgid "There are no open tasks here at the moment."
+msgstr "Não existe nenhuma tarefa aberta aqui até o momento."
+
+#: templates/helpdesk/task_detail.html:36
+msgid "Select a priority"
+msgstr "Selecione uma prioridade"
+
+#: templates/helpdesk/task_detail.html:43
+#: templates/helpdesk/task_detail.html:48
+#: templates/helpdesk/task_detail.html:65
+#: templates/helpdesk/task_detail.html:70
+#: templates/helpdesk/task_detail.html:87
+#: templates/helpdesk/task_detail.html:92
+msgid "Change"
+msgstr "Alterar"
+
+#: templates/helpdesk/task_detail.html:58
+msgid "Select a team"
+msgstr "Selecione um time"
+
+#: templates/helpdesk/task_detail.html:80
+msgid "Select a context"
+msgstr "Selecione um contexto"
+
+#: templates/helpdesk/task_detail.html:101
+msgid "New"
+msgstr "Novo"
+
+#: templates/helpdesk/task_detail.html:102
+msgid "Select an attachment"
+msgstr "Selecione um anexo"
+
+#: templates/helpdesk/task_detail.html:125
+msgid "Notes"
+msgstr "Notas"
+
+#: templates/helpdesk/task_detail.html:142
+msgid "There are no notes here at the moment."
+msgstr "Não existe nenhuma nota aqui até o momento."
+
+#: templates/helpdesk/task_detail.html:149
+msgid "New note"
+msgstr "Nova nota"
+
+#: templates/helpdesk/team.html:9
+msgid "Team name"
+msgstr "Nome do time"
+
+#: templates/helpdesk/team.html:21
+msgid "There are no teams here at the moment."
+msgstr "Não existe nenhum time aqui até o momento."
+
+#: templates/helpdesk/team.html:28
+msgid "New team"
+msgstr "Novo time"
+
+#~ msgid "Nome"
+#~ msgstr "Nome"
