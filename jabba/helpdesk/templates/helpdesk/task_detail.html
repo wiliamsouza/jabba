@@ -1,21 +1,29 @@
 {% extends "helpdesk/base.html" %}
 {% load i18n %}
+{% block breadcrumb %}
+  {{ block.super }}
+  <a href="{% url helpdesk_dashboard_team task.team.id %}"> {{ task.team|lower }} > </a><strong>task</strong>
+{% endblock %}
 {% block left %}
 <div class="container">
 	<h2>{% trans "Task" %} ( {{ task.id }} ) {{ task.description|slice:":50" }}... </h2>
   <table cellspacing="0">
     <tbody>
     <tr>
+      <th>{% trans "Created" %}</th>
+      <td>{{ task.created_by }} {{ task.created|date:"D d M Y" }} ({{ task.created|timesince }} {% trans "ago" %})</td>
+    </tr>
+    <tr>
       <th>{% trans "Assigned to" %}</th>
       {% if task.assigned_to %}
         {% if user.is_staff %}
-        <td>{{ task.assigned_to }} (<a href="/task/close/{{ task.id }}/">{% trans "Close" %}</a>)</td>
+        <td>{{ task.assigned_to }} (<a href="{% url helpdesk_task_close task.id %}">{% trans "Close" %}</a>)</td>
         {% else %}
         <td>{{ task.assigned_to }}</td>
         {% endif %}
       {% else %}
         {% if user.is_staff %}
-        <td>{% trans "Unassigned" %} (<a href="/task/assign/{{ task.id }}/">{% trans "Take" %}</a>)</td>
+        <td>{% trans "Unassigned" %} (<a href="{% url helpdesk_task_assign task.id %}"> {% trans "Take" %} </a>)</td>
         {% else %}
         <td>{% trans "Unassigned" %}</td>
         {% endif %}
@@ -23,17 +31,76 @@
     </tr>
     <tr>
       <th>{% trans "Priority" %}</th>
-      <td>{{ task.get_priority_display }}</td>
-    </tr>
-    <tr>
-      <th>{% trans "Created" %}</th>
-      <td>{{ task.created_by }} {{ task.created|date:"D d M Y" }} ({{ task.created|timesince }} {% trans "ago" %})</td>
-    </tr>
-    <tr>
-      <th>{% trans "Attachments" %} (<a id="new-attachment" href="#attachment">{% trans "New"%}</a>)</th>
+      {% if user.is_staff %}
       <td>
-        <div id="attachment-form" title="Select an attachment">
-        <form enctype="multipart/form-data" method="post" action="{% url helpdesk_attachment_add %}">{% csrf_token %}
+      <div id="priority-form" title="{% trans "Select a priority"%}">
+      <form method="post" action="{% url helpdesk_task_change_priority %}">{% csrf_token %}
+      <ul>
+        <li>
+          {{ priorityform.as_ul }}
+        </li>      
+        <li>
+          <input type="submit" value="{% trans "Change"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+      {{ task.get_priority_display }} (<a id="change-priority" href="{% url helpdesk_task_change_priority %}"> {% trans "Change"%} </a>)
+      </td>
+      {% else %}
+      <td>{{ task.get_priority_display }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <th>{% trans "Team" %}</th>
+      {% if user.is_staff %}
+      <td>
+      <div id="team-form" title="{% trans "Select a team"%}">
+      <form method="post" action="{% url helpdesk_task_detail_change_team %}">{% csrf_token %}
+      <ul>
+        <li>
+          {{ teamchangeform.as_ul }}
+        </li>      
+        <li>
+          <input type="submit" value="{% trans "Change"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+      {{ task.team }} (<a id="change-team" href="{% url helpdesk_task_detail_change_team %}"> {% trans "Change"%} </a>)
+      </td>
+      {% else %}
+      <td>{{ task.team }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <th>{% trans "Context" %}</th>
+      {% if user.is_staff %}
+      <td>
+      <div id="context-form" title="{% trans "Select a context"%}">
+      <form method="post" action="{% url helpdesk_task_change_context %}">{% csrf_token %}
+      <ul>
+        <li>
+          {{ contextchangeform.as_ul }}
+        </li>      
+        <li>
+          <input type="submit" value="{% trans "Change"%}"/>
+        </li>
+      </ul>
+      </form>
+      </div>
+      {{ task.context }} (<a id="change-context" href="{% url helpdesk_task_change_context %}"> {% trans "Change"%} </a>)
+      </td>
+      {% else %}
+      <td>{{ task.context }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <th>{% trans "Attachments" %}</th>
+      <td>
+        (<a id="new-attachment" href="{% url helpdesk_task_attachment_add task.id %}"> {% trans "New"%} </a>)
+        <div id="attachment-form" title="{% trans "Select an attachment"%}">
+        <form enctype="multipart/form-data" method="post" action="{% url helpdesk_task_attachment_add task.id %}">{% csrf_token %}
         <ul>
           {{ attachmentform.as_ul }}
           <li>
@@ -54,7 +121,6 @@
     </tbody>
   </table>
 </div>
-
 <div class="container">
 	<h2>{% trans "Notes" %}</h2>
 	{% if task.notes.all %}
@@ -73,24 +139,21 @@
   </table>
 	{% else %}
 	<div class="info">
-	<p>{% trans "Currently there are no notes." %}</p>
+	<p>{% trans "There are no notes here at the moment." %}</p>
 	</div>	
 	{% endif %}
 </div>
 {% endblock %}
-
 {% block rigth %}
-    <div class="container">
-      <h2>{% trans "New note" %}</h2>
-      <div class="add_form">
-      <form method="post" action="{% url helpdesk_note_add %}">{% csrf_token %}
-      <ul>
-        {{ noteform.as_ul }}
-        <li>
-          <input type="submit" value="{% trans "Submit"%}"/>
-        </li>
-      </ul>
-      </form>
-      </div>
-    </div>
+<div class="container">
+  <h2>{% trans "New note" %}</h2>
+  <form method="post" action="{% url helpdesk_note_add %}">{% csrf_token %}
+  <ul>
+    {{ noteform.as_ul }}
+    <li>
+      <input type="submit" value="{% trans "Submit"%}"/>
+    </li>
+  </ul>
+  </form>
+</div>
 {% endblock %}
