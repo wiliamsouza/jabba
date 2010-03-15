@@ -13,26 +13,25 @@
       </tr>
     </thead>
     <tbody>
-    {% for t in open_tasks %}
+    {% for task in open_tasks %}
     <tr class="{% cycle 'row1' 'row2' %}">
-      <td><a href="{{ t.url_task_detail }}">{{ t.description }}</a></td>
+      <td><a href="{% url helpdesk_task_detail task.id %}">{{ task.description }}</a></td>
       {% if task.assigned_to %}
       <td>{{ task.assigned_to }}</td>
       {% else %}
-      <td>Unassigned</td>
+      <td>{% trans "Unassigned" %}</td>
       {% endif %}
-      <td>{{ t.created|timesince }} {% trans "ago" %}</td>
+      <td>{{ task.created|timesince }} {% trans "ago" %}</td>
     </tr>
     {% endfor %}
     </tbody>
   </table>
 	{% else %}
 	<div class="info">
-	  <p>{% trans "Currently there are no open tasks." %}</p>
+	  <p>{% trans "There are no open tasks here at the moment." %}</p>
 	</div>	
 	{% endif %}
-</div>
-
+</div> <!-- container -->
 <div class="container">
 	<h2>{% trans "Closed tasks" %}</h2>
 	{% if closed_tasks %}
@@ -45,35 +44,32 @@
       </tr>
     </thead>
     <tbody>
-    {% for t in closed_tasks %}
+    {% for task in closed_tasks %}
     <tr class="{% cycle 'row1' 'row2' %}">
-      <td>{{ t.description }}</td>
-      <td>{{ t.closed_by }}</td>
-      <td>{{ t.closed|timesince }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.closed_by }}</td>
+      <td>{{ task.closed|timesince }}</td>
     </tr>
     {% endfor %}
     </tbody>
   </table>
 	{% else %}
 	<div class="info">
-  	<p>{% trans "Currently there are no closed tasks." %}</p>
+  	<p>{% trans "There are no closed tasks here at the moment." %}</p>
 	</div>	
 	{% endif %}
-</div>
+</div> <!-- container -->
 {% endblock %}
-
 {% block rigth %}
-    <div class="container">
-      <h2>{% trans "New task" %}</h2>
-      <!-- <div class="add_form"> -->
-      <form  method="post" action="{% url helpdesk_task_user_add %}">{% csrf_token %}
-      <ul>
-        {{ user_task_form.as_ul }}
-        <li>
-          <input type="submit" value="{% trans "Submit"%}"/>
-        </li>
-      </ul>
-      </form>
-      <!-- </div> -->
-    </div>
+<div class="container">
+  <h2>{% trans "New task" %}</h2>
+  <form  method="post" action="{% url helpdesk_task_user_add %}">{% csrf_token %}
+  <ul>
+    {{ user_task_form.as_ul }}
+    <li>
+      <input type="submit" value="{% trans "Submit"%}"/>
+    </li>
+  </ul>
+  </form>
+</div> <!-- container -->
 {% endblock %}
