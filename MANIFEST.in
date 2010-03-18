@@ -6,7 +6,9 @@ include README
 include AUTHORS
 recursive-include docs *
 recursive-include jabba/static *
+recursive-include jabba/locale *
 recursive-include jabba/templates *
+recursive-include jabba/helpdesk/locale *
 recursive-include jabba/helpdesk/templates *
 prune jabba/registration
 prune docs/_build
