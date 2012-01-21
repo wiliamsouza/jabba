@@ -19,7 +19,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-    (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^accounts/', include('registration.urls')),
     url(r'^$', index, name='home'),
     url(r'^dashboard/user/$', dashboard_user, name='helpdesk_dashboard_user'),
     url(r'^dashboard/staff/$', dashboard_staff, name='helpdesk_dashboard_staff'),
@@ -46,5 +46,5 @@ if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^static/(?P<path>.*)$',
          'django.views.static.serve',
-         {'document_root': '/home/waa/dev/jabba/jabba/static'}),
+         {'document_root': '/home/wiliam/devel/jabba/jabba/static'}),
     )
